@@ -1,0 +1,241 @@
+ADDRESSBOOK_SERVICE
+
+#UC 1 Ability to create a Address Book Service DB
+
+create database AddressBook_Service;
+
+show databases;
++---------------------+
+| Database            |
++---------------------+
+| AddressBook_Service |
+| information_schema  |
+| mysql               |
+| payroll_service     |
+| performance_schema  |
+| sys                 |
++---------------------+
+
+use AddressBook_Service;
+Database changed
+
+select database();
++---------------------+
+| database()          |
++---------------------+
+| addressbook_service |
++---------------------+
+
+#UC 2 Ability to create a Address Book Table with first and last names, address, city,
+state, zip, phone number and email as its attributes
+
+CREATE TABLE Address_Book
+    -> (
+    -> first_name varchar(255) not null,
+    -> last_name varchar(255) not null,
+    -> address varchar(255) not null,
+    -> city varchar(100) not null,
+    -> state varchar(100) not null,
+    -> zip int not null,
+    -> phone_number varchar(255) not null,
+    -> email varchar(255));
+
+describe Address_Book;
++--------------+--------------+------+-----+---------+-------+
+| Field        | Type         | Null | Key | Default | Extra |
++--------------+--------------+------+-----+---------+-------+
+| first_name   | varchar(255) | NO   |     | NULL    |       |
+| last_name    | varchar(255) | NO   |     | NULL    |       |
+| address      | varchar(255) | NO   |     | NULL    |       |
+| city         | varchar(100) | NO   |     | NULL    |       |
+| state        | varchar(100) | NO   |     | NULL    |       |
+| zip          | int          | NO   |     | NULL    |       |
+| phone_number | varchar(255) | NO   |     | NULL    |       |
+| email        | varchar(255) | YES  |     | NULL    |       |
++--------------+--------------+------+-----+---------+-------+
+
+#UC 3 Ability to insert new Contacts to Address Book
+
+insert into Address_Book (first_name, last_name, address, city, state, zip,phone_number,email) values
+    -> ('John', 'Abraham', 'pink towers', 'hyderabad', 'telangana', 500019, '9012345678', 'john123@gmail.com'),
+    -> ('Faruq', 'Khan', 'aparna towers', 'mumbai', 'maharastra', 400001,'8907654321','faruq@gmail.com'),
+    -> ('katarin', 'kate', 'vismai appartments', 'agra','delhi',780009,'4566767666','katarin@gmail.com'),
+    -> ('Nari', 'Yadav','devaki towers','mumbai','maharastra',232415,7654425567,'nari@gmail.com');
+
+
+select * from Address_Book;
++------------+-----------+----------------+--------+------------+--------+--------------+-------------------+
+| first_name | last_name | address        | city   | state      | zip    | phone_number | email             |
++------------+-----------+----------------+--------+------------+--------+--------------+-------------------+
+| katarin    | kate      | bonsai towers  | agra   | delhi      | 780009 | 4566767666   | katarin@gmail.com |
+| Aparna     | Yadav     | dev towers     | mumbai | maharastra | 890002 | 7654433332   | aparna@gmail.com  |
+| Aadhya     | Krupa     | lmn towers     | mumbai | maharastra | 675409 | 8765432189   | aadhya@gmail.com  |
+| Faruq      | Khan      | aparna towers  | mumbai | maharastra | 400001 | 8907653211   | faruq@gmail.com   |
+| Kavya      | Trivedi   | suji residancy | mumbai | maharastra | 430002 | 4565376896   | kavya@gmail.com   |
+| Nari       | Yadav     | devaki towers  | mumbai | maharastra | 232415 | 7654422222   | nari@gmail.com    |
+| Anand      | Kupa      | RRR towers     | mumbai | maharastra | 125409 | 9000002189   | anand@gmail.com   |
++------------+-----------+----------------+--------+------------+--------+--------------+-------------------+
+
+#UC 4 Ability to edit existing contact person using their name
+
+update Address_Book set address = 'bonsai towers' where first_name='katarin';
+
+select * from Address_Book;
++------------+-----------+----------------+--------+------------+--------+--------------+-------------------+
+| first_name | last_name | address        | city   | state      | zip    | phone_number | email             |
++------------+-----------+----------------+--------+------------+--------+--------------+-------------------+
+| katarin    | kate      | bonsai towers  | agra   | delhi      | 780009 | 4566767666   | katarin@gmail.com |
+| Aparna     | Yadav     | dev towers     | mumbai | maharastra | 890002 | 7654433332   | aparna@gmail.com  |
+| Aadhya     | Krupa     | lmn towers     | mumbai | maharastra | 675409 | 8765432189   | aadhya@gmail.com  |
+| Faruq      | Khan      | aparna towers  | mumbai | maharastra | 400001 | 8907653211   | faruq@gmail.com   |
+| Kavya      | Trivedi   | suji residancy | mumbai | maharastra | 430002 | 4565376896   | kavya@gmail.com   |
+| Nari       | Yadav     | devaki towers  | mumbai | maharastra | 232415 | 7654422222   | nari@gmail.com    |
+| Anand      | Kupa      | RRR towers     | mumbai | maharastra | 125409 | 9000002189   | anand@gmail.com   |
++------------+-----------+----------------+--------+------------+--------+--------------+-------------------+
+#UC 5 Ability to delete a person using person's name
+
+delete from Address_Book where first_name = 'John';
+
+select * from Address_Book;
++------------+-----------+----------------+--------+------------+--------+--------------+-------------------+
+| first_name | last_name | address        | city   | state      | zip    | phone_number | email             |
++------------+-----------+----------------+--------+------------+--------+--------------+-------------------+
+| katarin    | kate      | bonsai towers  | agra   | delhi      | 780009 | 4566767666   | katarin@gmail.com |
+| Aparna     | Yadav     | dev towers     | mumbai | maharastra | 890002 | 7654433332   | aparna@gmail.com  |
+| Aadhya     | Krupa     | lmn towers     | mumbai | maharastra | 675409 | 8765432189   | aadhya@gmail.com  |
+| Faruq      | Khan      | aparna towers  | mumbai | maharastra | 400001 | 8907653211   | faruq@gmail.com   |
+| Kavya      | Trivedi   | suji residancy | mumbai | maharastra | 430002 | 4565376896   | kavya@gmail.com   |
+| Nari       | Yadav     | devaki towers  | mumbai | maharastra | 232415 | 7654422222   | nari@gmail.com    |
+| Anand      | Kupa      | RRR towers     | mumbai | maharastra | 125409 | 9000002189   | anand@gmail.com   |
++------------+-----------+----------------+--------+------------+--------+--------------+-------------------+
+
+#UC 6 Ability to Retrieve Person belonging to a City or State from the Address Book
+
+select first_name from Address_Book where city= 'agra';
++------------+
+| first_name |
++------------+
+| katarin    |
++------------+
+
+#UC 7 Ability to understand the size of address book by City and State
+
+SELECT state, COUNT(first_name) FROM Address_Book group by state;
++------------+-------------------+
+| state      | COUNT(first_name) |
++------------+-------------------+
+| delhi      |                 1 |
+| maharastra |                 5 |
++------------+-------------------+
+
+
+select * from Address_Book;
++------------+-----------+----------------+--------+------------+--------+--------------+-------------------+
+| first_name | last_name | address        | city   | state      | zip    | phone_number | email             |
++------------+-----------+----------------+--------+------------+--------+--------------+-------------------+
+| katarin    | kate      | bonsai towers  | agra   | delhi      | 780009 | 4566767666   | katarin@gmail.com |
+| Aparna     | Yadav     | dev towers     | mumbai | maharastra | 890002 | 7654433332   | aparna@gmail.com  |
+| Aadhya     | Krupa     | lmn towers     | mumbai | maharastra | 675409 | 8765432189   | aadhya@gmail.com  |
+| Faruq      | Khan      | aparna towers  | mumbai | maharastra | 400001 | 8907653211   | faruq@gmail.com   |
+| Kavya      | Trivedi   | suji residancy | mumbai | maharastra | 430002 | 4565376896   | kavya@gmail.com   |
+| Nari       | Yadav     | devaki towers  | mumbai | maharastra | 232415 | 7654422222   | nari@gmail.com    |
+| Anand      | Kupa      | RRR towers     | mumbai | maharastra | 125409 | 9000002189   | anand@gmail.com   |
++------------+-----------+----------------+--------+------------+--------+--------------+-------------------+
+
+#UC 8 Ability to retrieve entries sorted alphabetically by Person’s name for a given city
+
+select * from Address_Book order by first_name asc;
++------------+-----------+----------------+--------+------------+--------+--------------+-------------------+
+| first_name | last_name | address        | city   | state      | zip    | phone_number | email             |
++------------+-----------+----------------+--------+------------+--------+--------------+-------------------+
+| Aadhya     | Krupa     | lmn towers     | mumbai | maharastra | 675409 | 8765432189   | aadhya@gmail.com  |
+| Anand      | Kupa      | RRR towers     | mumbai | maharastra | 125409 | 9000002189   | anand@gmail.com   |
+| Aparna     | Yadav     | dev towers     | mumbai | maharastra | 890002 | 7654433332   | aparna@gmail.com  |
+| Faruq      | Khan      | aparna towers  | mumbai | maharastra | 400001 | 8907653211   | faruq@gmail.com   |
+| katarin    | kate      | bonsai towers  | agra   | delhi      | 780009 | 4566767666   | katarin@gmail.com |
+| Kavya      | Trivedi   | suji residancy | mumbai | maharastra | 430002 | 4565376896   | kavya@gmail.com   |
+| Nari       | Yadav     | devaki towers  | mumbai | maharastra | 232415 | 7654422222   | nari@gmail.com    |
++------------+-----------+----------------+--------+------------+--------+--------------+-------------------+
+
+#UC 9 Ability to identify each Address Book with name and type 
+
+alter table Address_Book
+    -> add column type varchar(255) after last_name;
+
+describe Address_Book;
++--------------+--------------+------+-----+---------+-------+
+| Field        | Type         | Null | Key | Default | Extra |
++--------------+--------------+------+-----+---------+-------+
+| first_name   | varchar(255) | NO   |     | NULL    |       |
+| last_name    | varchar(255) | NO   |     | NULL    |       |
+| type         | varchar(255) | YES  |     | NULL    |       |
+| address      | varchar(255) | NO   |     | NULL    |       |
+| city         | varchar(100) | NO   |     | NULL    |       |
+| state        | varchar(100) | NO   |     | NULL    |       |
+| zip          | int          | NO   |     | NULL    |       |
+| phone_number | varchar(255) | NO   |     | NULL    |       |
+| email        | varchar(255) | YES  |     | NULL    |       |
++--------------+--------------+------+-----+---------+-------+
+
+select * from Address_Book;
++------------+-----------+------------+----------------+--------+------------+--------+--------------+-------------------+
+| first_name | last_name | type       | address        | city   | state      | zip    | phone_number | email             |
++------------+-----------+------------+----------------+--------+------------+--------+--------------+-------------------+
+| katarin    | kate      | profession | bonsai towers  | agra   | delhi      | 780009 | 4566767666   | katarin@gmail.com |
+| Aparna     | Yadav     | family     | dev towers     | mumbai | maharastra | 890002 | 7654433332   | aparna@gmail.com  |
+| Aadhya     | Krupa     | family     | lmn towers     | mumbai | maharastra | 675409 | 8765432189   | aadhya@gmail.com  |
+| Faruq      | Khan      | family     | aparna towers  | mumbai | maharastra | 400001 | 8907653211   | faruq@gmail.com   |
+| Kavya      | Trivedi   | friends    | suji residancy | mumbai | maharastra | 430002 | 4565376896   | kavya@gmail.com   |
+| Nari       | Yadav     | profession | devaki towers  | mumbai | maharastra | 232415 | 7654422222   | nari@gmail.com    |
+| Anand      | Kupa      | friends    | RRR towers     | mumbai | maharastra | 125409 | 9000002189   | anand@gmail.com   |
++------------+-----------+------------+----------------+--------+------------+--------+--------------+-------------------+
+
+#UC 10 Ability to get number of contact persons i.e. count by type
+
+SELECT type, COUNT(first_name) FROM Address_Book group by type;
++------------+-------------------+
+| type       | COUNT(first_name) |
++------------+-------------------+
+| profession |                 2 |
+| family     |                 3 |
+| friends    |                 2 |
++------------+-------------------+
+
+#UC 11 Ability to add person to both Friend and Family
+
+insert into Address_Book (first_name, last_name, address, city, state, zip,phone_number,email) values  ('Nazia', 'Tadak', 'pyramid residency', 'agra', 'delhi',930002,67566776896,'Nazia@gmail.com'),('Nazia','Tadak','pyramid residancy','agra','delhi',930002,67566776896,'Nazia@gmail.com');
+
+select * from Address_Book;
++------------+-----------+------------+-------------------+--------+------------+--------+--------------+-------------------+
+| first_name | last_name | type       | address           | city   | state      | zip    | phone_number | email             |
++------------+-----------+------------+-------------------+--------+------------+--------+--------------+-------------------+
+| katarin    | kate      | profession | bonsai towers     | agra   | delhi      | 780009 | 4566767666   | katarin@gmail.com |
+| Aparna     | Yadav     | family     | dev towers        | mumbai | maharastra | 890002 | 7654433332   | aparna@gmail.com  |
+| Aadhya     | Krupa     | family     | lmn towers        | mumbai | maharastra | 675409 | 8765432189   | aadhya@gmail.com  |
+| Faruq      | Khan      | family     | aparna towers     | mumbai | maharastra | 400001 | 8907653211   | faruq@gmail.com   |
+| Kavya      | Trivedi   | friends    | suji residancy    | mumbai | maharastra | 430002 | 4565376896   | kavya@gmail.com   |
+| Nari       | Yadav     | profession | devaki towers     | mumbai | maharastra | 232415 | 7654422222   | nari@gmail.com    |
+| Anand      | Kupa      | friends    | RRR towers        | mumbai | maharastra | 125409 | 9000002189   | anand@gmail.com   |
+| Nazia      | Tadak     | NULL       | pyramid residency | agra   | delhi      | 930002 | 67566776896  | Nazia@gmail.com   |
+| Nazia      | Tadak     | NULL       | pyramid residancy | agra   | delhi      | 930002 | 67566776896  | Nazia@gmail.com   |
++------------+-----------+------------+-------------------+--------+------------+--------+--------------+-------------------+
+
+select * from Address_Book order by first_name asc;
++------------+-----------+------------+-------------------+--------+------------+--------+--------------+-------------------+
+| first_name | last_name | type       | address           | city   | state      | zip    | phone_number | email             |
++------------+-----------+------------+-------------------+--------+------------+--------+--------------+-------------------+
+| Aadhya     | Krupa     | family     | lmn towers        | mumbai | maharastra | 675409 | 8765432189   | aadhya@gmail.com  |
+| Anand      | Kupa      | friends    | RRR towers        | mumbai | maharastra | 125409 | 9000002189   | anand@gmail.com   |
+| Aparna     | Yadav     | family     | dev towers        | mumbai | maharastra | 890002 | 7654433332   | aparna@gmail.com  |
+| Faruq      | Khan      | family     | aparna towers     | mumbai | maharastra | 400001 | 8907653211   | faruq@gmail.com   |
+| katarin    | kate      | profession | bonsai towers     | agra   | delhi      | 780009 | 4566767666   | katarin@gmail.com |
+| Kavya      | Trivedi   | friends    | suji residancy    | mumbai | maharastra | 430002 | 4565376896   | kavya@gmail.com   |
+| Nari       | Yadav     | profession | devaki towers     | mumbai | maharastra | 232415 | 7654422222   | nari@gmail.com    |
+| Nazia      | Tadak     | NULL       | pyramid residency | agra   | delhi      | 930002 | 67566776896  | Nazia@gmail.com   |
+| Nazia      | Tadak     | NULL       | pyramid residancy | agra   | delhi      | 930002 | 67566776896  | Nazia@gmail.com   |
++------------+-----------+------------+-------------------+--------+------------+--------+--------------+-------------------+
+
+
+
+
+
